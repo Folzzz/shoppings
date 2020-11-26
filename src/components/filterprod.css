@@ -1,0 +1,12 @@
+.filter {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 1rem;
+    padding: 1rem;
+    border-bottom: 2px solid #c0c0c0;
+}
+
+.filter div {
+    flex: 1;
+}

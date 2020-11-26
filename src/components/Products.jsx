@@ -2,7 +2,12 @@ import React from 'react';
 import currencyFormat from '../util';
 import './products.css';
 
-function Products({products}) {
+function Products({products, addToCart}) {
+
+    // const clickedOn=() => {
+    //     addToCart()
+    // }
+
     return (
         <div>
           <ul className="products">
@@ -19,7 +24,7 @@ function Products({products}) {
                             <div>
                                 {currencyFormat(product.price)}
                             </div>
-                            <button className="button primary">
+                            <button onClick={() => addToCart(product)} className="button primary">
                                 Add To Cart
                             </button>
                         </div>
