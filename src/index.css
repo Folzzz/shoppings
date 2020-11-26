@@ -73,11 +73,11 @@ footer {
 }
 
 .main-bar {
-  flex: 3 60rem;
+  flex: 3 60%;
 }
 
 .side-bar {
-  flex: 1 20rem;
+  flex: 1 40%;
 }
 
 /* filter section */

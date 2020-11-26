@@ -2,28 +2,25 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
 import Cart from './components/Cart';
-// import FilterProd from './components/FilterProd';
 import Products from './components/Products';
 
 function App() {
-// const [sort, setSort] = useState('')
-// const [category, setCategory] = useState('')
-const [isLoading, setIsLoading] = useState(true)
 const [products, setProducts] = useState([])
-const [cart, setCart] = useState([])
+const [cart, setCart] = useState(localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [])
 
 
 const removeFromCart =(product) => {
   const cartItems = cart.slice();
   setCart(cartItems.filter(item => item.id !== product.id));
   // cartItems.filter(item => item.id !== product.id);
-
-  // setCart(cartItems)
+  localStorage.setItem("cartItems", JSON.stringify(cartItems.filter(item => item.id !== product.id)));
+  
 }
 
 const clearCart =() => {
   // const cartItems = cart.slice();
   setCart([]);
+  localStorage.setItem("cartItems", JSON.stringify([]));
 }
 
 const addToCart =(product) => {
@@ -39,7 +36,23 @@ const addToCart =(product) => {
     cartItems.push({...product, count: 1})
   }
 
-  setCart(cartItems)
+  setCart(cartItems);
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+}
+
+const reduceFromCart =(product) => {
+  
+  const cartItems = cart.slice();
+  cartItems.forEach(item => {
+    if(item.id === product.id) {
+      item.count--;
+      
+    }
+  })
+
+
+  setCart(cartItems);
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
 }
 
 
@@ -69,7 +82,7 @@ useEffect (() => {
             </div>
     
             <div className="side-bar">
-                <Cart cartItems={cart} removeFromCart={removeFromCart} clearCart={clearCart}/>
+                <Cart cartItems={cart} removeFromCart={removeFromCart} clearCart={clearCart} addToCart={addToCart} reduceFromCart={reduceFromCart}/>
             </div>
         </div>
       </main>

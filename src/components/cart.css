@@ -54,5 +54,14 @@
     border-radius: 5px;
     background-color: #fff;
     cursor: pointer;
-    padding: 0.25rem;
+    padding: 0.4rem;
+    margin-left: 0.25rem;
+}
+.button:hover {
+    background-color: #bbb;
+}
+.clear-btn {
+    margin: 1rem 0;
+    padding: 0.3rem;
+    cursor: pointer;
 }

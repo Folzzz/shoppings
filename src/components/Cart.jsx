@@ -1,8 +1,9 @@
 import React from 'react';
 import currencyFormat from '../util';
 import './cart.css'
+import CheckOutForm from './CheckOutForm';
 
-function Cart({cartItems, removeFromCart, clearCart}) {
+function Cart({cartItems, removeFromCart, clearCart, addToCart, reduceFromCart}) {
     return (
         <>
         <div>
@@ -28,6 +29,8 @@ function Cart({cartItems, removeFromCart, clearCart}) {
                                         <button className='button' onClick={()=> removeFromCart(item)}>
                                             Remove
                                         </button>
+                                        <button onClick={() => addToCart(item)} className="button"> &#x2B; </button>
+                                        <button onClick={() => reduceFromCart(item)} className="button" disabled={item.count > 1 ? '' : 'disabled'}> &minus; </button>
                                     </div>
                                     {/* <button onClick={()=> removeFromCart(item)}>
                                         Remove
@@ -47,12 +50,16 @@ function Cart({cartItems, removeFromCart, clearCart}) {
                                     a + b.price*b.count, 0
                                 ))}
                             </div>
-                            <button className="button primary">
+                            <CheckOutForm totalAmount={currencyFormat( 
+                                    cartItems.reduce((a,b) =>
+                                    a + b.price*b.count, 0
+                                ))} />
+                            {/* <button className="button primary">
                                 Proceed
-                            </button>
+                            </button> */}
                         </div>
 
-                        <button onClick={()=>clearCart()}>Clear Cart</button>
+                        <button onClick={()=>clearCart()} className="clear-btn" > Clear Cart</button>
                     </div>
                 )}
                 
